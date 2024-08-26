@@ -11,6 +11,7 @@ from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn.ensemble import RandomForestClassifier,GradientBoostingClassifier
 
 # Creating the GUI
+st.set_page_config(page_title = "Symptoms Checker", page_icon = ":male-doctor:", layout = "centered"
 st.title("Symptoms Checker and Recommendation System")
 st.info("This is a machine learning model which predicts potential disease based on the inputted symptoms and provides personalized recommendations for effective precautions, medicines, workout and diet to support proactive healthcare and wellness.")
 
@@ -110,6 +111,16 @@ with st.container():
                 st.write("Predicted Disease is: ")
                 st.error(predicted_disease)
                 st.info(desc)
+               
+                st.success("Suggested Medications:")
+                for m_i in med:
+                    m_i = m_i.lstrip("[")
+                    m_i = m_i.rstrip("]")
+                    m_real = m_i.split(",")
+                    i=1
+                    for item in m_real:
+                        st.write(i,":",item)
+                        i+=1
 
             else:
                 st.error("No Symptoms are Selected!!")
@@ -121,21 +132,16 @@ with st.container():
                 for pc_i in pre[0]:
                     st.write(i,":",pc_i)
                     i+=1
-                st.success("Suggested Medications:")
-                i=1
-                for m_i in med:
-                    st.write(i,":",m_i)
-                    i+=1
                 st.info("Suggested Workouts:")
                 i=1
                 for w_i in wrkt:
                     st.write(i,":",w_i)
                     i+=1
                 st.success("Suggested Diet:")
-                i=1
                 for d_i in die:
-                    st.write(i,":",d_i)
-                    i+=1  
+                    d_i = d_i.lstrip("[")
+                    d_i = d_i.rstrip("]")
+                    st.write(d_i)
 
             else:
                 st.error("No Symptoms are Selected!!")
